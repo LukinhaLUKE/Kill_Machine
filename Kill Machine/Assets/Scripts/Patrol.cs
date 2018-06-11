@@ -33,35 +33,44 @@ public class Patrol : MonoBehaviour {
 			flip (-1);
 		}
 
-		if (coll == true && movLeft == true) {
-			movLeft = false;
-		}else if (coll == true && movLeft == false) {
-			movLeft = true;
-		}
+		//if (coll == true && movLeft == true) {
+		//	movLeft = false;
+		//}else if (coll == true && movLeft == false) {
+		//	movLeft = true;
+		//}
 
 		if (life == 0) {
+			GameController.addscore (100);
 			Destroy (gameObject);
+		}
+
+		if (this.transform.position == targets [0].transform.position) {
+			movLeft = false;
+		}
+		if (this.transform.position == targets [1].transform.position) {
+			movLeft = true;
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D x){
-		if (x.gameObject.transform == targets [0]) {
-			coll = true;
-		} else if (x.gameObject.transform == targets [1]) {
-			coll = true;
-		}
-	}
-	void OnCollisionStay2D(Collision2D x){
-		if (x.gameObject.transform == targets[0]) {
-			coll = false;
-		} else if (x.gameObject.transform == targets[1]) {
-			coll = false;
-		}
-	}
+	//void OnCollisionEnter2D(Collision2D x){
+	//	if (x.gameObject.transform == targets [0]) {
+	//		coll = true;
+	//	} else if (x.gameObject.transform == targets [1]) {
+	//		coll = true;
+	//	}
+	//}
+
+	//void OnCollisionStay2D(Collision2D x){
+	//	if (x.gameObject.transform == targets[0]) {
+	//		coll = false;
+	//	} else if (x.gameObject.transform == targets[1]) {
+	//		coll = false;
+	//	}
+	//}
+
 	void OnTriggerEnter2D(Collider2D x){
 		if (x.gameObject.tag == "Bullet") {
 			Destroy (x.gameObject);
-			GameController.addscore (100);
 			life -= Player.getDamageAmmo ();
 		}
 	}
