@@ -4,69 +4,49 @@ using UnityEngine;
 
 public class Patrol : MonoBehaviour {
 
-	public int life;
+	private int life;
 	public float speedMovement;
-	public Transform[] targets;
-	private bool movLeft;
-	private bool coll;
-
 	SpriteRenderer sr;
 	bool flipX;
 	int flipValue;
+	public float stopDistance;
+	public float nerDistance;
+	public float startShots;
+	public float timeShots;
+	public GameObject shot;
+	private Transform player;
 
 	// Use this for initialization
 	void Start () {
-		movLeft = true;
 		life = 4;
 		sr = this.GetComponent<SpriteRenderer>();
+		player = GameObject.FindGameObjectWithTag ("Player").transform;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		float move = speedMovement * Time.deltaTime;
 
-		if (movLeft == true) {
-			transform.position = Vector2.MoveTowards (transform.position, targets[0].position, move);
-			flip (1);
-		}else if (movLeft == false) {
-			transform.position = Vector2.MoveTowards (transform.position, targets[1].position, move);
-			flip (-1);
-		}
-
-		//if (coll == true && movLeft == true) {
-		//	movLeft = false;
-		//}else if (coll == true && movLeft == false) {
-		//	movLeft = true;
-		//}
-
 		if (life == 0) {
 			GameController.addscore (100);
 			Destroy (gameObject);
 		}
 
-		if (this.transform.position == targets [0].transform.position) {
-			movLeft = false;
+		if (player.transform.position.x > this.transform.position.x) {
+			flip (-1);
+		} 
+		if (player.transform.position.x < this.transform.position.x) {
+			flip (1);
 		}
-		if (this.transform.position == targets [1].transform.position) {
-			movLeft = true;
+
+		if (Vector2.Distance (transform.position, player.position) < nerDistance) {
+			transform.position = Vector2.MoveTowards (transform.position, player.position, move);
+		} else if (Vector2.Distance (transform.position, player.position) > stopDistance) {
+			transform.position = Vector2.MoveTowards(transform.position, player.position, move);
+		} else if (Vector2.Distance (transform.position, player.position) < stopDistance && Vector2.Distance (transform.position, player.position) > nerDistance){
+			transform.position = this.transform.position;
 		}
 	}
-
-	//void OnCollisionEnter2D(Collision2D x){
-	//	if (x.gameObject.transform == targets [0]) {
-	//		coll = true;
-	//	} else if (x.gameObject.transform == targets [1]) {
-	//		coll = true;
-	//	}
-	//}
-
-	//void OnCollisionStay2D(Collision2D x){
-	//	if (x.gameObject.transform == targets[0]) {
-	//		coll = false;
-	//	} else if (x.gameObject.transform == targets[1]) {
-	//		coll = false;
-	//	}
-	//}
 
 	void OnTriggerEnter2D(Collider2D x){
 		if (x.gameObject.tag == "Bullet") {

@@ -5,27 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	public static bool isAlive;
-
 	public float factorForce;
     public float factorJump;
-
     Rigidbody2D rb;
 	SpriteRenderer playerSR;
-
-	bool left;
-	bool right;
-	bool vertical;
-
 	bool flipX;
 	int flipValue;
-
 	public GameObject bulletToRight, bulletToLeft;
 	Vector2 bulletPos;
 	public float fireRate = 0.5f;
 	public static int damageAmmo = 2;
 	float nextFire = 0.0f;
-
 	public Jump jump;
+	bool up;
 
 	void Start () {
 		isAlive = true;
@@ -39,17 +31,14 @@ public class Player : MonoBehaviour {
 	}
 
 	 void FixedUpdate () {
-
 		if (isAlive == true) {
-			
-			left = Input.GetKey (KeyCode.A);
-			right = Input.GetKey (KeyCode.D);
-			vertical = Input.GetKey (KeyCode.W);
 
-			if (right == true) {
+			up = Input.GetKey (KeyCode.W);
+
+			if (Input.GetKey (KeyCode.D)) {
 				rb.AddForce (Vector2.right * factorForce);
 				flip (1);
-			} else if (left == true) {
+			} else if (Input.GetKey (KeyCode.A)) {
 				rb.AddForce (Vector2.left * factorForce);
 				flip (-1);
 			}
@@ -68,7 +57,7 @@ public class Player : MonoBehaviour {
 				Instantiate (bulletToLeft, bulletPos, Quaternion.identity);
 			}
 
-			if (vertical == true && jump.ident == true) {
+			if (up == true && jump.ident == true) {
 				rb.AddForce (Vector2.up * factorJump); 
 			}
 		}

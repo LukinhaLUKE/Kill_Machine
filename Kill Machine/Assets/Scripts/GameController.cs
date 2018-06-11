@@ -50,17 +50,11 @@ public class GameController : MonoBehaviour {
 	void FixedUpdate () {
 		if (lifes == 0) {
 			Player.setIsAlive (false);
-			delay(2f);
-			ReloadLevel ();
+			loadScene ("GameOver");
 		}
 	}
 
-	IEnumerator delay (float time){
-		//return IEnumerator;
-		yield return new WaitForSeconds (time);
-	}
-
-	void ReloadLevel(){
-		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+	public void loadScene(string name){
+		SceneManager.LoadScene (name);
 	}
 }
