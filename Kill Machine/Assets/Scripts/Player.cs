@@ -18,16 +18,20 @@ public class Player : MonoBehaviour {
 	float nextFire = 0.0f;
 	public Jump jump;
 	bool up;
+	public Animator anime;
+	//float mov;
 
 	void Start () {
 		isAlive = true;
 		flipValue = 1;
 		rb = this.GetComponent<Rigidbody2D> ();
-		playerSR = this.GetComponent<SpriteRenderer>();
+		playerSR = this.GetComponent<SpriteRenderer> ();
+		//mov = Input.GetAxis ("horizontal");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		andarAnime ();
 	}
 
 	 void FixedUpdate () {
@@ -47,13 +51,13 @@ public class Player : MonoBehaviour {
 				flip (1);
 				nextFire = Time.time + fireRate;
 				bulletPos = transform.position;
-				bulletPos += new Vector2 (+1.5f, -0.1f);
+				bulletPos += new Vector2 (+1.5f, -1.5f);
 				Instantiate (bulletToRight, bulletPos, Quaternion.identity);
 			} else if (Input.GetKey (KeyCode.LeftArrow) && Time.time > nextFire) {
 				flip (-1);
 				nextFire = Time.time + fireRate;
 				bulletPos = transform.position;
-				bulletPos += new Vector2 (-1.5f, -0.1f);
+				bulletPos += new Vector2 (-1.5f, -1.5f);
 				Instantiate (bulletToLeft, bulletPos, Quaternion.identity);
 			}
 
@@ -92,7 +96,17 @@ public class Player : MonoBehaviour {
 	void flip(int value){
 		if (this.flipValue != value) {
 			flipValue = value;
-			playerSR.flipX = !playerSR.flipX;
+			//playerSR.flipX = !playerSR.flipX;
+			gameObject.transform.localScale = new Vector3(value * Mathf.Abs(gameObject.transform.localScale.x),gameObject.transform.localScale.y,gameObject.transform.localScale.z);
 		}
+	}
+
+	void andarAnime (){
+		if (Mathf.Abs(rb.velocity.x) > 0.001f) {
+			anime.SetBool ("Andar", true);
+		} else {
+			anime.SetBool ("Andar", false);
+		}
+		Debug.Log (rb.velocity.x);
 	}
 }
