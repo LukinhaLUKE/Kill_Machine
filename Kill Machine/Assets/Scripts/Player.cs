@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
 				flip (1);
 				nextFire = Time.time + fireRate;
 				bulletPos = transform.position;
-				bulletPos += new Vector2 (+1.5f, -1.5f);
+				bulletPos += new Vector2 (+1.5f, -1.3f);
                 //var go = Instantiate (bulletToRight, bulletPos, Quaternion.identity);
                 var go = Instantiate(bullet, bulletPos, Quaternion.identity);
                 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour {
 				flip (-1);
 				nextFire = Time.time + fireRate;
 				bulletPos = transform.position;
-				bulletPos += new Vector2 (-1.5f, -1.5f);
+				bulletPos += new Vector2 (-1.5f, -1.3f);
                 //Instantiate (bulletToLeft, bulletPos, Quaternion.identity);
                 var go = Instantiate(bullet, bulletPos, Quaternion.identity);
                 go.GetComponent<Bullet>().velX *= -1;
@@ -93,6 +93,7 @@ public class Player : MonoBehaviour {
         else if (x.gameObject.tag == "EnemyBullet")
         {
             GameController.rmvLifes(1);
+			Destroy (x.gameObject);
         }
     }
 
