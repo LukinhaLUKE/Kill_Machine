@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		score = 0;
-		lifes = 3;
+		lifes = 6;
 		paused = false;
 	}
 

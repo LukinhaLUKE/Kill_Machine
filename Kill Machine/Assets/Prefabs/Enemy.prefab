@@ -119,11 +119,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMovement: 3
   stopDistance: 15
-  nerDistance: 10
-  startShots: 3
-  timeShots: 5
+  nerDistance: 5
+  startShots: 30
+  timeShots: 10
   bullet: {fileID: 114359257692347074, guid: 147ab6e6669d7044d87b9094c71af426, type: 2}
-  fireRate: 0.8
+  fireRate: 2
 --- !u!212 &212008086167280136
 SpriteRenderer:
   m_ObjectHideFlags: 1

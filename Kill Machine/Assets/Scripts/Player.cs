@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
 	public float factorForce;
     public float factorJump;
     Rigidbody2D rb;
-	SpriteRenderer playerSR;
+	//SpriteRenderer playerSR;
 	bool flipX;
 	int flipValue;
     public Bullet bullet;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 		isAlive = true;
 		flipValue = 1;
 		rb = this.GetComponent<Rigidbody2D> ();
-		playerSR = this.GetComponent<SpriteRenderer> ();
+		//playerSR = this.GetComponent<SpriteRenderer> ();
 		//mov = Input.GetAxis ("horizontal");
 	}
 	
