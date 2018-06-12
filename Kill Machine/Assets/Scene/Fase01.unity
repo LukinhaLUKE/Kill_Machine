@@ -5169,13 +5169,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factorForce: 20
   factorJump: 300
-  bulletToRight: {fileID: 1932073585864502, guid: 147ab6e6669d7044d87b9094c71af426,
-    type: 2}
-  bulletToLeft: {fileID: 1071933231902568, guid: e0848bdde8c39804e81588d4eee35661,
-    type: 2}
+  bullet: {fileID: 114359257692347074, guid: 147ab6e6669d7044d87b9094c71af426, type: 2}
   fireRate: 0.5
   jump: {fileID: 2128981506}
   anime: {fileID: 189939482}
+  maxXVelocity: 6
+  maxYVelocity: 6
 --- !u!61 &1316637887
 BoxCollider2D:
   m_ObjectHideFlags: 0

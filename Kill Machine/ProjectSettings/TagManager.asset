@@ -10,6 +10,7 @@ TagManager:
   - LightMachineGun
   - HeavyMachineGun
   - Bullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
