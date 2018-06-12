@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -51,8 +52,7 @@ public class GameController : MonoBehaviour {
 		if (lifes <= 0) {
 			Player.setIsAlive (false);
 			loadScene ("GameOver");
-		}
-		if (score >= 900) {
+		}else if (score >= 900) {
 			Player.setIsAlive (false);
 			loadScene ("Winner");
 		}
