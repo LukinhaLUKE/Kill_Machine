@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
 			Player.setIsAlive (false);
 			loadScene ("GameOver");
 		}
-		if (score >= 1000) {
+		if (score >= 900) {
 			Player.setIsAlive (false);
 			loadScene ("Winner");
 		}

@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMovement: 3
-  stopDistance: 15
-  nerDistance: 5
+  stopDistance: 13
+  nerDistance: 8
   startShots: 30
   timeShots: 10
   bullet: {fileID: 114359257692347074, guid: 147ab6e6669d7044d87b9094c71af426, type: 2}
