@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (lifes == 0) {
+		if (lifes <= 0) {
 			Player.setIsAlive (false);
 			loadScene ("GameOver");
 		}

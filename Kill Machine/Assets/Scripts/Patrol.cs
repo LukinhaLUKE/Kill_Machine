@@ -14,6 +14,10 @@ public class Patrol : MonoBehaviour {
 	public float startShots;
 	public float timeShots;
     public Bullet bullet;
+	Vector2 bulletPos;
+	public float fireRate = 0.5f;
+	public static int damageAmmo = 2;
+	float nextFire = 0.0f;
     private Transform player;
 
 	// Use this for initialization
@@ -44,15 +48,12 @@ public class Patrol : MonoBehaviour {
             transform.position = this.transform.position;
         }else if(Vector2.Distance(transform.position, player.position) < stopDistance && Vector2.Distance(transform.position, player.position) > nerDistance) {
             transform.position = Vector2.MoveTowards(transform.position, player.position, move);
-        }else if (Vector2.Distance(transform.position, player.position) < nerDistance)
+		}else if (Vector2.Distance(transform.position, player.position) < nerDistance && Time.time > nextFire)
         {
-           
-
+			nextFire = Time.time + fireRate;
+			bulletPos = transform.position;
             var go = Instantiate(bullet, transform.position, Quaternion.identity);
-
-            go.GetComponent<Bullet>().velX *= flipValue * -1;
-
-
+			go.GetComponent<Bullet>().velX *= flipValue * -1;
             go.tag = "EnemyBullet";
         }
 
