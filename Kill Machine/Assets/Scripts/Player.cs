@@ -11,17 +11,20 @@ public class Player : MonoBehaviour {
 	SpriteRenderer playerSR;
 	bool flipX;
 	int flipValue;
-	public GameObject bulletToRight, bulletToLeft;
-	Vector2 bulletPos;
+    public Bullet bullet;
+    Vector2 bulletPos;
 	public float fireRate = 0.5f;
 	public static int damageAmmo = 2;
 	float nextFire = 0.0f;
 	public Jump jump;
 	bool up;
 	public Animator anime;
-	//float mov;
+    public float maxXVelocity;
+    public float maxYVelocity;
 
-	void Start () {
+    //float mov;
+
+    void Start () {
 		isAlive = true;
 		flipValue = 1;
 		rb = this.GetComponent<Rigidbody2D> ();
@@ -52,18 +55,28 @@ public class Player : MonoBehaviour {
 				nextFire = Time.time + fireRate;
 				bulletPos = transform.position;
 				bulletPos += new Vector2 (+1.5f, -1.5f);
-				Instantiate (bulletToRight, bulletPos, Quaternion.identity);
+                //var go = Instantiate (bulletToRight, bulletPos, Quaternion.identity);
+                var go = Instantiate(bullet, bulletPos, Quaternion.identity);
+                
 			} else if (Input.GetKey (KeyCode.LeftArrow) && Time.time > nextFire) {
 				flip (-1);
 				nextFire = Time.time + fireRate;
 				bulletPos = transform.position;
 				bulletPos += new Vector2 (-1.5f, -1.5f);
-				Instantiate (bulletToLeft, bulletPos, Quaternion.identity);
-			}
+                //Instantiate (bulletToLeft, bulletPos, Quaternion.identity);
+                var go = Instantiate(bullet, bulletPos, Quaternion.identity);
+                go.GetComponent<Bullet>().velX *= -1;
+            }
 
 			if (up == true && jump.ident == true) {
 				rb.AddForce (Vector2.up * factorJump); 
 			}
+
+            
+            rb.velocity = new Vector2( 
+                Mathf.Clamp(rb.velocity.x, -maxXVelocity, maxXVelocity ), 
+                Mathf.Clamp(rb.velocity.y, -maxYVelocity, maxYVelocity)
+            );
 		}
 	}
 
@@ -77,13 +90,18 @@ public class Player : MonoBehaviour {
 			fireRate = 0.7f;
 			damageAmmo = 4;
 		}
-	}
+        else if (x.gameObject.tag == "EnemyBullet")
+        {
+            GameController.rmvLifes(1);
+        }
+    }
 
 	void OnCollisionEnter2D(Collision2D x){
 		if (x.gameObject.tag == "Enemy") {
 			GameController.rmvLifes (1);
 		}
-	}
+       
+    }
 
 	public static void setIsAlive(bool value){
 		isAlive = value;
@@ -107,6 +125,6 @@ public class Player : MonoBehaviour {
 		} else {
 			anime.SetBool ("Andar", false);
 		}
-		Debug.Log (rb.velocity.x);
+		//Debug.Log (rb.velocity.x);
 	}
 }

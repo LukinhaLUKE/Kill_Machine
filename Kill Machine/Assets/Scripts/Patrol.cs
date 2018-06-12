@@ -13,8 +13,8 @@ public class Patrol : MonoBehaviour {
 	public float nerDistance;
 	public float startShots;
 	public float timeShots;
-	public GameObject shot;
-	private Transform player;
+    public Bullet bullet;
+    private Transform player;
 
 	// Use this for initialization
 	void Start () {
@@ -39,13 +39,24 @@ public class Patrol : MonoBehaviour {
 			flip (1);
 		}
 
-		if (Vector2.Distance (transform.position, player.position) < nerDistance) {
-			transform.position = Vector2.MoveTowards (transform.position, player.position, move);
-		} else if (Vector2.Distance (transform.position, player.position) > stopDistance) {
-			transform.position = Vector2.MoveTowards(transform.position, player.position, move);
-		} else if (Vector2.Distance (transform.position, player.position) < stopDistance && Vector2.Distance (transform.position, player.position) > nerDistance){
-			transform.position = this.transform.position;
-		}
+
+        if (Vector2.Distance(transform.position, player.position) > stopDistance) {
+            transform.position = this.transform.position;
+        }else if(Vector2.Distance(transform.position, player.position) < stopDistance && Vector2.Distance(transform.position, player.position) > nerDistance) {
+            transform.position = Vector2.MoveTowards(transform.position, player.position, move);
+        }else if (Vector2.Distance(transform.position, player.position) < nerDistance)
+        {
+           
+
+            var go = Instantiate(bullet, transform.position, Quaternion.identity);
+
+            go.GetComponent<Bullet>().velX *= flipValue * -1;
+
+
+            go.tag = "EnemyBullet";
+        }
+
+
 	}
 
 	void OnTriggerEnter2D(Collider2D x){
