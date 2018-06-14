@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 	int flipValue;
     public Bullet bullet;
     Vector2 bulletPos;
-	public float fireRate = 0.5f;
+	public float fireRate;
 	public static int damageAmmo = 2;
 	float nextFire = 0.0f;
 	public Jump jump;
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
 		isAlive = true;
 		flipValue = 1;
 		rb = this.GetComponent<Rigidbody2D> ();
+		fireRate = 0.5f;
 		//playerSR = this.GetComponent<SpriteRenderer> ();
 		//mov = Input.GetAxis ("horizontal");
 	}
