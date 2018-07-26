@@ -86,12 +86,14 @@ public class Player : MonoBehaviour {
 			Destroy (x.gameObject);
 			fireRate = 0.3f;
 			damageAmmo = 1;
+		} else if (x.gameObject.tag == "Exit") {
+			isAlive = false;
+			GameController.loadScene ("Winner");
 		} else if (x.gameObject.tag == "HeavyMachineGun"){
 			Destroy (x.gameObject);
 			fireRate = 0.7f;
 			damageAmmo = 4;
-		}
-        else if (x.gameObject.tag == "EnemyBullet")
+		} else if (x.gameObject.tag == "EnemyBullet")
         {
             GameController.rmvLifes(1);
 			Destroy (x.gameObject);

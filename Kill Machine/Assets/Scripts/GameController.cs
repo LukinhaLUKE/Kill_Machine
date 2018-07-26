@@ -38,10 +38,10 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Escape) && paused == false) {
+		if (Input.GetKeyDown (KeyCode.P) && paused == false) {
 			paused = true;
 			Time.timeScale = 0;
-		} else if (Input.GetKeyDown (KeyCode.Escape) && paused == true) {
+		} else if (Input.GetKeyDown (KeyCode.P) && paused == true) {
 			paused = false;
 			Time.timeScale = 1;
 		}
@@ -52,13 +52,10 @@ public class GameController : MonoBehaviour {
 		if (lifes <= 0) {
 			Player.setIsAlive (false);
 			loadScene ("GameOver");
-		}else if (score >= 900) {
-			Player.setIsAlive (false);
-			loadScene ("Winner");
 		}
 	}
 
-	public void loadScene(string name){
+	public static void loadScene(string name){
 		SceneManager.LoadScene (name);
 	}
 }
