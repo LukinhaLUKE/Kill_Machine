@@ -17,13 +17,13 @@ public class Jump : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D x){
-		if (x.gameObject.tag == "Floor" || x.gameObject.tag == "Plataform") {
+		if (x.gameObject.tag == "Floor" || x.gameObject.tag == "Plataform" || x.gameObject.tag == "Enemy") {
 			ident = true;
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D x){
-		if (x.gameObject.tag == "Floor" || x.gameObject.tag == "Plataform") {
+		if (x.gameObject.tag == "Floor" || x.gameObject.tag == "Plataform" || x.gameObject.tag == "Enemy") {
 			ident = false;
 		}
 	}

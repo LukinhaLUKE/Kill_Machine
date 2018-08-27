@@ -84,6 +84,7 @@ public class Player : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D x){
 		if (x.gameObject.tag == "LightMachineGun") {
 			Destroy (x.gameObject);
+			GameController.addscore (200);
 			fireRate = 0.3f;
 			damageAmmo = 1;
 		} else if (x.gameObject.tag == "Exit") {
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour {
 			GameController.loadScene ("Winner");
 		} else if (x.gameObject.tag == "HeavyMachineGun"){
 			Destroy (x.gameObject);
+			GameController.addscore (200);
 			fireRate = 0.7f;
 			damageAmmo = 4;
 		} else if (x.gameObject.tag == "EnemyBullet")

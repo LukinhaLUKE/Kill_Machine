@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
 	private static int score;
-	private static int lifes;
+	private static float lifes;
 	private static bool paused;
+	public Image healthBar;
+	private float maxLifes = 10;
 
 	public static void addscore(int value){
 		score += value;
@@ -26,14 +28,14 @@ public class GameController : MonoBehaviour {
 		lifes -= value;
 	}
 
-	public static int getLifes(){
+	public static float getLifes(){
 		return lifes;
 	}
 
 	// Use this for initialization
 	void Start () {
 		score = 0;
-		lifes = 6;
+		lifes = 10;
 		paused = false;
 	}
 
@@ -45,6 +47,7 @@ public class GameController : MonoBehaviour {
 			paused = false;
 			Time.timeScale = 1;
 		}
+		healthBar.fillAmount = lifes / maxLifes;
 	}
 	
 	// Update is called once per frame
