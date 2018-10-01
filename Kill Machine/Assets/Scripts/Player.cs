@@ -97,7 +97,7 @@ public class Player : MonoBehaviour {
 			damageAmmo = 4;
 		} else if (x.gameObject.tag == "EnemyBullet")
         {
-            GameController.rmvLifes(1);
+            GameController.rmvLifes(2);
 			Destroy (x.gameObject);
         }
     }
